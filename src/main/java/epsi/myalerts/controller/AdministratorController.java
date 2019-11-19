@@ -11,13 +11,13 @@ import epsi.myalerts.model.Administrator;
 import epsi.myalerts.repository.AdministratorRepository;
 
 @RestController
-@RequestMapping("api/administrator/")
+@RequestMapping("api/administrator")
 public class AdministratorController {
 	
 	@Autowired
 	AdministratorRepository administratorRepository;
 	
-	@GetMapping("/")
+	@GetMapping("")
 	public List<Administrator> getAllAdministrators() {
 		return administratorRepository.findAll();
 	}
