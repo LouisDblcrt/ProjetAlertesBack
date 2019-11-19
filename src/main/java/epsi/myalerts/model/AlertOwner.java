@@ -7,22 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-/*
- * 
-create table alert_owner(
-id int primary key auto_increment,
-enterprise varchar(150) not null,
-description varchar(300),
-priority_max int not null
-);
- */
+
 @Entity
 @Table(name="alert_owner")
 public class AlertOwner {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@NotBlank
 	private String enterprise;
@@ -33,11 +25,11 @@ public class AlertOwner {
 	@NotBlank
 	private int priorityMax;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

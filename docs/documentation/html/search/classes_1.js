@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['myalertsapplication_5',['MyAlertsApplication',['../classepsi_1_1_my_alerts_1_1_my_alerts_application.html',1,'epsi::MyAlerts']]]
+  ['homecontroller_25',['HomeController',['../classepsi_1_1myalerts_1_1controller_1_1_home_controller.html',1,'epsi::myalerts::controller']]]
 ];

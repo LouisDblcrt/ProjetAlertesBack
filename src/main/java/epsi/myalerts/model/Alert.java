@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 public class Alert {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@NotBlank
 	private String name;
@@ -33,11 +33,11 @@ public class Alert {
 	@JoinColumn(name="alert_owner")
 	private AlertOwner alert_owner;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
