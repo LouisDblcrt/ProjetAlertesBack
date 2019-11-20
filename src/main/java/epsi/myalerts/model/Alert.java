@@ -1,6 +1,7 @@
 package epsi.myalerts.model;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "alert")
@@ -23,7 +27,8 @@ public class Alert {
 
 	private String description;
 
-	@NotBlank
+	@NotNull
+	@Type(type="date")
 	private Date alertDate;
 	
 	@NotBlank
