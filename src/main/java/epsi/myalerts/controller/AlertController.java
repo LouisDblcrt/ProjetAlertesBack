@@ -46,13 +46,22 @@ public class AlertController {
 	public Alert getAlertById(@PathVariable(name="id") Integer id ) {
 		return alertRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
-	
+	/**
+	 * This method is called when you do a POST on /api/alerts.
+	 * This method creates a new alert. 
+	 * @param alert alert's informations
+	 * @return alert created previously
+	 */
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Alert createNewAlert(@RequestBody Alert alert) {
 		return alertRepository.save(alert);
 	}
-	
+	/**
+	 * This method is called when you do a PUT on /api/alerts
+	 * @param alert alert's informations
+	 * @return alert modified 
+	 */
 	@PutMapping("")
 	public Alert updateAlert(@RequestBody Alert alert) {
 		Alert alreadyExist = alertRepository.findById(alert.getId()).orElseThrow(NotFoundException::new);
@@ -63,7 +72,10 @@ public class AlertController {
 		alreadyExist.setName(alert.getName());
 		return alertRepository.save(alert);
 	}
-	
+	/**
+	 * This method is called when you do a DELETE on /api/alerts
+	 * @param id alert's id who you want to be deleted 
+	 */
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteAlert(@PathVariable(name="id") Integer id ) {
