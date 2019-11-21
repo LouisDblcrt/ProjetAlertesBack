@@ -2,7 +2,7 @@ package epsi.myalerts.model;
 
 
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,8 +26,8 @@ public class Alert {
 
 	private String description;
 
-	
-	private Date alertDate;
+	@NotNull
+	private Date alert_date;
 	
 	@NotBlank
 	private String lieu;
@@ -60,12 +60,12 @@ public class Alert {
 		this.description = description;
 	}
 
-	public Date getAlertDate() {
-		return alertDate;
+	public Date getAlert_date() {
+		return alert_date;
 	}
 
-	public void setAlertDate(Date alertDate) {
-		this.alertDate = alertDate;
+	public void setAlert_date(Date alertDate) {
+		this.alert_date = alertDate;
 	}
 
 	public String getLieu() {

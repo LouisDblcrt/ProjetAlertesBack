@@ -1,6 +1,5 @@
 package epsi.myalerts.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +55,7 @@ public class AlertController {
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Alert createNewAlert(@RequestBody Alert alert) {
+		
 		return alertRepository.save(alert);
 	}
 	/**
@@ -69,7 +69,7 @@ public class AlertController {
 			alertFind.setName(alert.getName());
 			alertFind.setLieu(alert.getLieu());
 			alertFind.setDescription(alert.getDescription());
-			alertFind.setAlertDate(alert.getAlertDate());
+			alertFind.setAlert_date(alert.getAlert_date());
 			alertFind.setAlert_owner(alert.getAlert_owner());
 			return alertRepository.save(alertFind);
 		}).orElseGet(()->{

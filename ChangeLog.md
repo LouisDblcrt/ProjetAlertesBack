@@ -12,5 +12,3 @@ bug : creation d'une alerte pb avec la date
 
 ### TODO
 
-finir subscription controller
-
