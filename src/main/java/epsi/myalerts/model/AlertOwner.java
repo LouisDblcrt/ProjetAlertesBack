@@ -7,13 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="alert_owner")
 public class AlertOwner {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
 	@NotBlank
@@ -22,7 +23,7 @@ public class AlertOwner {
 	private String description;
 	
 	@Column(name="priority_max")
-	@NotBlank
+	@NotNull
 	private int priorityMax;
 
 	public Integer getId() {

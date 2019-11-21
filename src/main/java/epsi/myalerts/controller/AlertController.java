@@ -1,5 +1,6 @@
 package epsi.myalerts.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,15 +63,19 @@ public class AlertController {
 	 * @param alert alert's informations
 	 * @return alert modified 
 	 */
-	@PutMapping("")
-	public Alert updateAlert(@RequestBody Alert alert) {
-		Alert alreadyExist = alertRepository.findById(alert.getId()).orElseThrow(NotFoundException::new);
-		alreadyExist.setAlert_owner(alert.getAlert_owner());
-		alreadyExist.setAlertDate(alert.getAlertDate());
-		alreadyExist.setDescription(alert.getDescription());
-		alreadyExist.setLieu(alert.getLieu());
-		alreadyExist.setName(alert.getName());
-		return alertRepository.save(alert);
+	@PutMapping("/{id}")
+	public Alert updateAlert(@RequestBody Alert alert,@PathVariable(name="id")Integer id) {
+		return alertRepository.findById(id).map(alertFind ->{
+			alertFind.setName(alert.getName());
+			alertFind.setLieu(alert.getLieu());
+			alertFind.setDescription(alert.getDescription());
+			alertFind.setAlertDate(alert.getAlertDate());
+			alertFind.setAlert_owner(alert.getAlert_owner());
+			return alertRepository.save(alertFind);
+		}).orElseGet(()->{
+			return alertRepository.save(alert);
+		});
+		
 	}
 	/**
 	 * This method is called when you do a DELETE on /api/alerts

@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -53,9 +54,27 @@ public class AlertOwnerController {
 	 * @param alertOwner informations on the alert owner
 	 * @return alert owner created 
 	 */
-	@PostMapping("/")
+	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
 	public AlertOwner createAlertOwner(@RequestBody AlertOwner alertOwner) {
 		return alertOwnerRepository.save(alertOwner);
+	}
+	@PutMapping("/{id}")
+	public AlertOwner modifyAlertOwner(@RequestBody AlertOwner alertOwner,@PathVariable(name="id")Integer id) {
+		return alertOwnerRepository.findById(id).map(alertFind ->{
+			alertFind.setId(id);
+			alertFind.setDescription(alertOwner.getDescription());
+			alertFind.setEnterprise(alertOwner.getEnterprise());
+			alertFind.setPriorityMax(alertOwner.getPriorityMax());
+			return alertOwnerRepository.save(alertFind);
+		}).orElseGet(()->{
+			return alertOwnerRepository.save(alertOwner);
+		});
+	}
+	
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteAlertOwner(@PathVariable(name="id") Integer id ) {
+		alertOwnerRepository.deleteById(id);
 	}
 }

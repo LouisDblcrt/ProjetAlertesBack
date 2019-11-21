@@ -1,9 +1,11 @@
 package epsi.myalerts.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,11 +65,23 @@ public class UserController {
 		return userRepository.save(user);
 	}
 	
-	@PutMapping("")
-	public User modifyUser(@RequestBody User user) {
-		User alreadyExist = userRepository.findById(user.getId()).orElseThrow(NotFoundException::new);
-		alreadyExist.setEmail(user.getEmail());
-		alreadyExist.setPhone_number(user.getPhone_number());
-		return userRepository.save(user);
+	@PutMapping("/{id}")
+	public User modifyUser(@RequestBody User user,@PathVariable(name="id")Integer id) {
+		return userRepository.findById(user.getId()).map(userFind ->{
+			userFind.setEmail(user.getEmail());
+			userFind.setPhone_number(user.getPhone_number());
+			return userRepository.save(userFind);
+		}).orElseGet(()->{
+			user.setId(id);
+			return userRepository.save(user);
+		});
+		
+	}
+	
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void deleteUser(@PathVariable(name="id") Integer id) {
+		userRepository.deleteById(id);
+		
 	}
 }

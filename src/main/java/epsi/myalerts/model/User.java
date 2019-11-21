@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@NotBlank

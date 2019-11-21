@@ -66,15 +66,17 @@ public class AdministratorController {
 	 * @param administrator new administrator's informations
 	 * @return administrator's informations updated 
 	 */
-	@PutMapping("")
-	@ResponseStatus(HttpStatus.OK)
-	public Administrator putAdministrator(@RequestBody Administrator administrator) {
-		Administrator alreadyExist = administratorRepository.findById(administrator.getId()).orElseThrow(NotFoundException::new);
-		alreadyExist.setLogin(administrator.getLogin());
-		alreadyExist.setName(administrator.getName());
-		alreadyExist.setPassword(administrator.getPassword());
-		alreadyExist.setSurname(administrator.getSurname());
-		return administratorRepository.save(alreadyExist);
+	@PutMapping("/{id}")
+	public Administrator putAdministrator(@RequestBody Administrator administrator,@PathVariable(name="id") Integer id) {
+		return administratorRepository.findById(id).map(adminFind ->{
+			adminFind.setLogin(administrator.getLogin());
+			adminFind.setName(administrator.getName());
+			adminFind.setPassword(administrator.getPassword());
+			adminFind.setSurname(administrator.getSurname());
+			return administratorRepository.save(adminFind);
+		}).orElseGet(()->{
+			return administratorRepository.save(administrator);
+		});
 	}
 	/**
 	 * This method is called when you do a DELETE on /api/administrators/{id} with the ID of an administrator.

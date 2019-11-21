@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [V1]
 
-### TODO / BUG
+### BUG
 
-bug : creation d'une alerte pb avec la date 
+bug : creation d'une alerte pb avec la date
+
+### TODO
+
+finir subscription controller
+
