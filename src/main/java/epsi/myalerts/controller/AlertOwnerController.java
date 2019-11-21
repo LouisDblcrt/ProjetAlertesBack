@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,7 @@ public class AlertOwnerController {
 	 * This method is called when you do a GET on /api/alertOwners. It returns the list of alert owners
 	 * @return list of alert owners
 	 */
+	@CrossOrigin(origins = "http://localhost:8100")
 	@GetMapping("")
 	public List<AlertOwner> getAllAlertOwner(){
 		return alertOwnerRepository.findAll();
