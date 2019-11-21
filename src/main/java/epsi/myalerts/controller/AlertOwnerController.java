@@ -32,7 +32,7 @@ public class AlertOwnerController {
 	 * This method is called when you do a GET on /api/alertOwners. It returns the list of alert owners
 	 * @return list of alert owners
 	 */
-	@CrossOrigin(origins = "http://localhost:8100")
+	//@CrossOrigin(origins = "http://localhost:8100")
 	@GetMapping("")
 	public List<AlertOwner> getAllAlertOwner(){
 		return alertOwnerRepository.findAll();
