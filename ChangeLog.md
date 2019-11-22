@@ -8,7 +8,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### BUG
 
-bug : creation d'une alerte pb avec la date
-
 ### TODO
 

@@ -23,7 +23,7 @@ create table alert(
 id int primary key auto_increment,
 name varchar(100) not null,
 description varchar(300),
-alertDate date not null,
+alert_date date not null,
 lieu varchar(50) not null,
 alert_owner int not null,
 constraint FK_ALERT_OWNER foreign key(alert_owner) references alert_owner(id)
