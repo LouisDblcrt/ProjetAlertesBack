@@ -70,6 +70,7 @@ public class UserController {
 		return userRepository.findById(user.getId()).map(userFind ->{
 			userFind.setEmail(user.getEmail());
 			userFind.setPhone_number(user.getPhone_number());
+			userFind.setPassword(user.getPassword());
 			return userRepository.save(userFind);
 		}).orElseGet(()->{
 			user.setId(id);

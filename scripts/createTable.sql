@@ -9,7 +9,8 @@ create table administrator (
 create table user(
 id int primary key,
 phone_number varchar(10),
-email varchar(150)
+email varchar(150),
+password varchar(128) not null
 );
 
 create table alert_owner(
