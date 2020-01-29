@@ -12,7 +12,7 @@ public class User {
 	@Id
 	private Integer id;
 	
-	@NotBlank
+	
 	private String phone_number;
 	
 	@NotBlank

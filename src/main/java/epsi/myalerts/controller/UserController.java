@@ -64,6 +64,7 @@ public class UserController {
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
 	public User createNewUser(@RequestBody User user) {
+		user.setId(newUserId());
 		return userRepository.save(user);
 	}
 	
@@ -96,5 +97,10 @@ public class UserController {
 			return userToLog;
 		}
 		throw new NotAuthorized();
+	}
+	
+	
+	private int newUserId() {
+		return userRepository.maxIdUser()+1;
 	}
 }
