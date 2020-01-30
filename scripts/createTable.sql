@@ -10,7 +10,8 @@ create table user(
 id int primary key,
 phone_number varchar(10),
 email varchar(150),
-password varchar(128) not null
+password varchar(128) not null,
+UNIQUE(email)
 );
 
 create table alert_owner(
