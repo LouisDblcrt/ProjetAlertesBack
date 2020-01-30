@@ -21,6 +21,7 @@ import epsi.myalerts.model.User;
 import epsi.myalerts.repository.UserRepository;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.core.Response;
+
 /**
  * This class represent the REST API for the users. You add/delete/modify users.
  * These informations are stored in a database.
@@ -55,52 +56,54 @@ public class UserController {
 	public User getUserById(@PathVariable(name = "id") Integer id) {
 		return userRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
-/**
- * This method is called when you do a POST on /api/users.
- * It creates a user in the database
- * @param user informations of the new user
- * @return user created
- */
+
+	/**
+	 * This method is called when you do a POST on /api/users. It creates a user in
+	 * the database
+	 * 
+	 * @param user informations of the new user
+	 * @return user created
+	 */
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
 	public User createNewUser(@RequestBody User user) {
 		user.setId(newUserId());
 		return userRepository.save(user);
 	}
-	
+
 	@PutMapping("/{id}")
-	public User modifyUser(@RequestBody User user,@PathVariable(name="id")Integer id) {
-		return userRepository.findById(user.getId()).map(userFind ->{
+	public User modifyUser(@RequestBody User user, @PathVariable(name = "id") Integer id) {
+		return userRepository.findById(user.getId()).map(userFind -> {
 			userFind.setEmail(user.getEmail());
 			userFind.setPhone_number(user.getPhone_number());
 			userFind.setPassword(user.getPassword());
 			return userRepository.save(userFind);
-		}).orElseGet(()->{
+		}).orElseGet(() -> {
 			user.setId(id);
 			return userRepository.save(user);
 		});
-		
+
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteUser(@PathVariable(name="id") Integer id) {
+	public void deleteUser(@PathVariable(name = "id") Integer id) {
 		userRepository.deleteById(id);
 	}
-	
+
 	@PostMapping("/login")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public User login(@RequestBody User user) {
 		User userToLog = userRepository.selectUserByEmail(user.getEmail()).orElseThrow(NotFoundException::new);
-		
-		if(userToLog.getPassword().equals(user.getPassword())) {
+
+		if (userToLog.getPassword().equals(user.getPassword())) {
 			return userToLog;
 		}
 		throw new NotAuthorized();
 	}
-	
-	
+
 	private int newUserId() {
-		return userRepository.maxIdUser()+1;
+		Integer id = userRepository.maxIdUser();
+		return id == null ? 1 : userRepository.maxIdUser() + 1;
 	}
 }
