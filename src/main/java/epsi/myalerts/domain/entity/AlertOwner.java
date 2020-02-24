@@ -1,4 +1,4 @@
-package epsi.myalerts.model;
+package epsi.myalerts.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,11 +1,11 @@
-package epsi.myalerts.repository;
+package epsi.myalerts.usecase.db;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import epsi.myalerts.model.User;
+import epsi.myalerts.domain.entity.User;
 
 public interface UserRepository extends JpaRepository<User,Integer>{
 	

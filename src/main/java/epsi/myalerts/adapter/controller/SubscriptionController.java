@@ -1,4 +1,4 @@
-package epsi.myalerts.controller;
+package epsi.myalerts.adapter.controller;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import epsi.myalerts.exceptions.NotFoundException;
-import epsi.myalerts.model.Subscription;
-import epsi.myalerts.model.SubscriptionPK;
-import epsi.myalerts.repository.SubscriptionRepository;
+import epsi.myalerts.domain.entity.Subscription;
+import epsi.myalerts.domain.entity.SubscriptionPK;
+import epsi.myalerts.domain.exception.NotFoundException;
+import epsi.myalerts.usecase.db.SubscriptionRepository;
 
 @RestController
 @RequestMapping("/api/subscriptions")
@@ -32,7 +32,7 @@ public class SubscriptionController {
 		return subscriptionRepository.findAll();
 	}
 
-	@GetMapping("/{id_user}&{id_alert_owner}")
+	@GetMapping("/user={id_user}&alert_owner={id_alert_owner}")
 	public Subscription getSubscriptionById(@PathVariable(name="id_user")Integer idUser,@PathVariable(name="id_alert_owner")Integer idAlertOwner){
 		SubscriptionPK subPK = new SubscriptionPK(idUser,idAlertOwner);
 		return subscriptionRepository.findById(subPK).orElseThrow(NotFoundException::new);
@@ -44,7 +44,7 @@ public class SubscriptionController {
 		return subscriptionRepository.save(subscription);
 	}
 	
-	@PutMapping("/{id_user}&{id_alert_owner}")
+	@PutMapping("/user={id_user}&alert_owner{id_alert_owner}")
 	public Subscription modifySubscription(@RequestBody Subscription subscription, @PathVariable(name="id_user") Integer idUser,@PathVariable(name="id_alert_owner") Integer idAlertOwner) {
 		SubscriptionPK sub = new SubscriptionPK(idUser,idAlertOwner);
 		return subscriptionRepository.findById(sub).map(subscriptionFind ->{
@@ -56,7 +56,7 @@ public class SubscriptionController {
 		});
 	}
 	@CrossOrigin
-	@DeleteMapping("/{id_user}&{id_alert_owner}")
+	@DeleteMapping("/user={id_user}&alert_owner={id_alert_owner}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteSubscription(@PathVariable(name="id_user")Integer idUser, @PathVariable(name="id_alert_owner")Integer idAlertOwner) {
 		subscriptionRepository.deleteById(new SubscriptionPK(idUser,idAlertOwner));

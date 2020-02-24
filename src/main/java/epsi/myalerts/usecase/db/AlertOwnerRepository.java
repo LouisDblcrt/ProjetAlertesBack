@@ -1,4 +1,4 @@
-package epsi.myalerts.repository;
+package epsi.myalerts.usecase.db;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import epsi.myalerts.model.AlertOwner;
+import epsi.myalerts.domain.entity.AlertOwner;
 
 @Repository
 public interface AlertOwnerRepository extends JpaRepository<AlertOwner, Integer> {

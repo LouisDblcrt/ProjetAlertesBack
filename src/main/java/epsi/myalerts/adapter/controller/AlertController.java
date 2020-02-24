@@ -1,4 +1,4 @@
-package epsi.myalerts.controller;
+package epsi.myalerts.adapter.controller;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import epsi.myalerts.exceptions.NotFoundException;
-import epsi.myalerts.model.Alert;
-import epsi.myalerts.repository.AlertRepository;
+import epsi.myalerts.domain.entity.Alert;
+import epsi.myalerts.domain.exception.NotFoundException;
+import epsi.myalerts.usecase.db.AlertRepository;
 
 /***
  * This class represent the REST API for the alerts. You add/delete/modify informations on

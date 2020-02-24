@@ -1,4 +1,4 @@
-package epsi.myalerts.controller;
+package epsi.myalerts.adapter.controller;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import epsi.myalerts.exceptions.NotFoundException;
-import epsi.myalerts.model.Administrator;
-import epsi.myalerts.repository.AdministratorRepository;
+import epsi.myalerts.domain.entity.Administrator;
+import epsi.myalerts.domain.exception.NotFoundException;
+import epsi.myalerts.usecase.db.AdministratorRepository;
 
 /***
  * This class represent the REST API for the administrators. You add/delete/modify informations on

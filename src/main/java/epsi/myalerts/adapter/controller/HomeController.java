@@ -1,4 +1,4 @@
-package epsi.myalerts.controller;
+package epsi.myalerts.adapter.controller;
 
 
 import org.springframework.web.bind.annotation.RequestMapping;
