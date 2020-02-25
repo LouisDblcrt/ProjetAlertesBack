@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,14 +29,7 @@ public class AlertController {
 
 	@Autowired
 	AlertRepository alertRepository;
-	/**
-	 * This method is called when you do a GET on /api/alerts
-	 * @return All the alerts 
-	 */
-	@GetMapping("")
-	public List<Alert> getAllAlerts(){
-		return alertRepository.findAll();
-	}
+
 	/**
 	 * This method is called when you do a GET on /api/alerts/{id}.
 	 * It returns informations of an alert according to the id in parameter
@@ -85,5 +79,13 @@ public class AlertController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteAlert(@PathVariable(name="id") Integer id ) {
 		alertRepository.deleteById(id);
+	}
+	
+	@GetMapping("")
+	public List<Alert> getAlertsByUser(@RequestParam("user") Integer id ) {
+		if(id==null) {
+			return alertRepository.findAll();
+		}
+		return alertRepository.selectAlertFromUser(id);
 	}
 }

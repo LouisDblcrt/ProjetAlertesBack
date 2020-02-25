@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,18 +32,6 @@ public class AlertOwnerController {
 
 	@Autowired
 	AlertOwnerRepository alertOwnerRepository;
-
-	/**
-	 * This method is called when you do a GET on /api/alertOwners. It returns the
-	 * list of alert owners
-	 * 
-	 * @return list of alert owners
-	 */
-	// @CrossOrigin(origins = "http://localhost:8100")
-	@GetMapping("")
-	public List<AlertOwner> getAllAlertOwner() {
-		return alertOwnerRepository.findAll();
-	}
 
 	/**
 	 * This method is called when you do a GET on /api/alertOwners/{id}. It returns
@@ -81,6 +70,7 @@ public class AlertOwnerController {
 			return alertOwnerRepository.save(alertOwner);
 		});
 	}
+
 	@CrossOrigin
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
@@ -88,15 +78,19 @@ public class AlertOwnerController {
 		alertOwnerRepository.deleteById(id);
 	}
 
-	@GetMapping("/notSubs/{id}")
+	@GetMapping("")
 	@ResponseStatus(HttpStatus.OK)
-	public List<AlertOwner> getAlertOwnersNotSub(@PathVariable(name = "id") Integer id) {
-		return alertOwnerRepository.getAlertsOwnerWithoutSub(id);
-	}
+	public List<AlertOwner> getAlertOwnersByUser(@RequestParam(name = "user") Integer id,
+			@RequestParam(name = "search",required=false) String search, @RequestParam(name = "sub") boolean sub) {
+		if (sub) {
+			return this.alertOwnerRepository.getAlertsOwnerWithSub(id);
+		} else {
+			if (search==null) {
+				return this.alertOwnerRepository.getAlertsOwnerWithoutSub(id);
+			}
+			System.out.println(this.alertOwnerRepository.getAlertsOwnerForSearch(id, search));
+			return this.alertOwnerRepository.getAlertsOwnerForSearch(id, search);
+		}
 
-	@GetMapping("/subs/{id}")
-	@ResponseStatus(HttpStatus.OK)
-	public List<AlertOwner> getAlertOwnersSub(@PathVariable(name = "id") Integer id) {
-		return alertOwnerRepository.getAlertsOwnerWithSub(id);
 	}
 }
