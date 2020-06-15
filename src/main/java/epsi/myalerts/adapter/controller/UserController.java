@@ -1,10 +1,12 @@
 package epsi.myalerts.adapter.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -72,6 +74,7 @@ public class UserController {
 		return userRepository.save(user);
 	}
 
+	@CrossOrigin
 	@PutMapping("/{id}")
 	public User modifyUser(@RequestBody User user, @PathVariable(name = "id") Integer id) {
 		return userRepository.findById(user.getId()).map(userFind -> {
@@ -103,6 +106,10 @@ public class UserController {
 		throw new NotAuthorized();
 	}
 
+	@PostMapping("/checkPassword")
+	public boolean checkPassword(@RequestBody User user) {
+		return passwordEncoder.matches(user.getPassword(),this.getUserById(user.getId()).getPassword());
+	}
 	private int newUserId() {
 		Integer id = userRepository.maxIdUser();
 		return id == null ? 1 : userRepository.maxIdUser() + 1;
