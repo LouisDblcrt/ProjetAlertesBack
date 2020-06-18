@@ -49,7 +49,7 @@ public class AlertController {
 	@PostMapping("")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Alert createNewAlert(@RequestBody Alert alert) {
-		
+		System.out.println(alert.getAlert_date());
 		return alertRepository.save(alert);
 	}
 	/**
@@ -65,6 +65,7 @@ public class AlertController {
 			alertFind.setDescription(alert.getDescription());
 			alertFind.setAlert_date(alert.getAlert_date());
 			alertFind.setAlert_owner(alert.getAlert_owner());
+			alertFind.setCriticite(alert.getCriticite());
 			return alertRepository.save(alertFind);
 		}).orElseGet(()->{
 			return alertRepository.save(alert);

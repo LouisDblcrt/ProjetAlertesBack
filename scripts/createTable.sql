@@ -39,3 +39,6 @@ constraint PK_SUBSCRIPTION primary key(id_user,id_alert_owner),
 constraint FK_ID_USER foreign key(id_user) references user(id),
 constraint FK_ID_ALERT_OWNER foreign key(id_alert_owner) references alert_owner(id)
 );
+
+alter table alert add column criticite int;
+alter table alert modify alert_date DATETIME ;

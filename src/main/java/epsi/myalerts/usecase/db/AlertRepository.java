@@ -11,6 +11,6 @@ import epsi.myalerts.domain.entity.Alert;
 
 @Repository
 public interface AlertRepository extends JpaRepository<Alert,Integer> {
-	@Query(value="SELECT * from Alert where alert_owner in (select id_alert_owner from Subscription where id_user =?)", nativeQuery=true)
+	@Query(value="SELECT * from Alert where alert_owner in (select id_alert_owner from Subscription where id_user =?) order by alert_date DESC", nativeQuery=true)
 	List<Alert> selectAlertFromUser(Integer id_user);
 }

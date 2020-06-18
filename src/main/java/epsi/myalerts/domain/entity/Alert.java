@@ -1,16 +1,18 @@
 package epsi.myalerts.domain.entity;
 
-
-
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -27,15 +29,20 @@ public class Alert {
 	private String description;
 
 	@NotNull
-	@JoinColumn(name="alert_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	@JoinColumn(name = "alert_date")
 	private Date alert_date;
-	
+
 	@NotBlank
 	private String lieu;
-	
+
 	@OneToOne
-	@JoinColumn(name="alert_owner")
+	@JoinColumn(name = "alert_owner")
 	private AlertOwner alert_owner;
+
+	
+	@Enumerated(EnumType.ORDINAL)
+	private Criticite criticite;
 
 	public Integer getId() {
 		return id;
@@ -84,5 +91,13 @@ public class Alert {
 	public void setAlert_owner(AlertOwner alert_owner) {
 		this.alert_owner = alert_owner;
 	}
-	
+
+	public Criticite getCriticite() {
+		return criticite;
+	}
+
+	public void setCriticite(Criticite criticite) {
+		this.criticite = criticite;
+	}
+
 }
