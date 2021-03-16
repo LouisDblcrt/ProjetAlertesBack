@@ -66,6 +66,8 @@ public class AlertController {
 			alertFind.setAlert_date(alert.getAlert_date());
 			alertFind.setAlert_owner(alert.getAlert_owner());
 			alertFind.setCriticite(alert.getCriticite());
+			alertFind.setLat(alert.getLat());
+			alertFind.setLng(alert.getLng());
 			return alertRepository.save(alertFind);
 		}).orElseGet(()->{
 			return alertRepository.save(alert);

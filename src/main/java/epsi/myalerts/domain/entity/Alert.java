@@ -43,6 +43,10 @@ public class Alert {
 	
 	@Enumerated(EnumType.ORDINAL)
 	private Criticite criticite;
+	
+	private Double lat;
+	
+	private Double lng;
 
 	public Integer getId() {
 		return id;
@@ -99,5 +103,23 @@ public class Alert {
 	public void setCriticite(Criticite criticite) {
 		this.criticite = criticite;
 	}
+
+	public Double getLat() {
+		return lat;
+	}
+
+	public void setLat(Double lat) {
+		this.lat = lat;
+	}
+
+	public Double getLng() {
+		return lng;
+	}
+
+	public void setLng(Double lng) {
+		this.lng = lng;
+	}
+	
+	
 
 }
